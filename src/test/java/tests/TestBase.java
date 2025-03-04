@@ -1,20 +1,25 @@
 package tests;
 
+import com.codeborne.selenide.Selenide;
+import config.WebDriverConfig;
+import config.ConfigReader;
 import config.WebDriverProvider;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 public class TestBase {
-    protected WebDriver driver;
+    private static final WebDriverConfig webConfig = ConfigReader.Instance.read();
 
-    @BeforeEach
-    public void startDriver() {
-        driver = new WebDriverProvider().get();
+    @BeforeAll
+    static void setUp() {
+        WebDriverProvider webDriverProvider = new  WebDriverProvider(webConfig);
+        webDriverProvider.webConfig();
     }
 
     @AfterEach
-    public void afterEach() {
-        driver.quit();
+    void afterEach() {
+        Selenide.closeWebDriver();
     }
 }
