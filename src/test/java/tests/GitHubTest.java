@@ -9,7 +9,7 @@ public class GitHubTest extends TestBase {
     GitHubPage gitHubPage = new GitHubPage();
 
     @Test
-    void checkTitleOfEnterprisePage() {
+    void checkTitlePage() {
         gitHubPage
                 .openPage()
                 .hoverSolutions()
